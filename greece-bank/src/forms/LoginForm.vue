@@ -15,8 +15,8 @@
           Remember me
         </label>
         <div class="forgotpasswordregister">
-        <a href="#">Forgot password?</a>
-        <a href="#">Dont have an account? Register</a>
+        <router-link to="/recover-password">Forgot password?</router-link>
+        <router-link to="/register">Dont have an account? Register</router-link>
         </div>
       </div>
 

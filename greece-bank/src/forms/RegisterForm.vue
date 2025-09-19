@@ -1,54 +1,90 @@
+<!-- src/forms/RegisterForm.vue -->
 <template>
-  <div>
-    <h1>hi</h1>
+  <div class="register-form">
+    <h2>Create Your Account</h2>
+
+    <form @submit.prevent="handleRegister">
+      <label for="username">Username</label>
+      <input type="text" id="username" v-model="username" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" v-model="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" v-model="password" required />
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" v-model="confirmPassword" required />
+
+      <div class="options">
+        <label>
+          <input type="checkbox" v-model="agreeTerms" />
+          I agree to the terms and conditions
+        </label>
+        <div class="login-link">
+          <router-link to="/">Already have an account? Login</router-link>
+        </div>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
+const username = ref('')
 const email = ref('')
 const password = ref('')
-const rememberMe = ref(false)
+const confirmPassword = ref('')
+const agreeTerms = ref(false)
 
-const handleLogin = () => {
+const handleRegister = () => {
+  console.log('Username:', username.value)
   console.log('Email:', email.value)
   console.log('Password:', password.value)
-  console.log('Remember Me:', rememberMe.value)
+  console.log('Confirm Password:', confirmPassword.value)
+  console.log('Agreed to Terms:', agreeTerms.value)
+
+  if (password.value !== confirmPassword.value) {
+    alert("Passwords do not match!")
+    return
+  }
+
+  if (!agreeTerms.value) {
+    alert("You must agree to the terms and conditions!")
+    return
+  }
+
+  // Here you would send data to your backend API
 }
 </script>
 
 <style scoped>
-.login-form {
+.register-form {
   background-color: white;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 30%;
 }
 
-.login-form {
-    width: 30%;
-}
-
-.login-form h2 {
+.register-form h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #222;
 }
 
-.login-form label {
+.register-form label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
 }
 
-.forgotpasswordregister {
-    display: flex;
-    flex-direction: column;
-}
-
-.login-form input[type="email"],
-.login-form input[type="password"] {
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -57,15 +93,15 @@ const handleLogin = () => {
   font-size: 1rem;
 }
 
-.login-form .options {
+.register-form .options {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
 
-.login-form button {
+.register-form button {
   width: 100%;
   padding: 12px;
   background-color: #0070c0;
@@ -77,7 +113,17 @@ const handleLogin = () => {
   transition: background-color 0.2s;
 }
 
-.login-form button:hover {
+.register-form button:hover {
   background-color: #005a99;
+}
+
+.login-link a {
+  color: #0070c0;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }
 </style>
