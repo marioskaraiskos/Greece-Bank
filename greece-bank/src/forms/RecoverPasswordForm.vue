@@ -25,7 +25,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios' // make sure axios is installed
+import axios from 'axios'
 
 const email = ref('')
 const message = ref('')
@@ -38,19 +38,20 @@ const handleRecover = async () => {
   loading.value = true
 
   try {
-    // Replace this URL with your backend endpoint
-    const response = await axios.post('/api/recover-password', { email: email.value })
+    const response = await axios.post('http://localhost:5000/api/auth/recover', {
+      email: email.value
+    })
 
-    message.value = response.data.message || "Recovery email sent! Check your inbox."
+    message.value = response.data.message
     email.value = ''
   } catch (err) {
-    console.error(err)
-    error.value = err.response?.data?.message || "Failed to send recovery email."
+    error.value = err.response?.data?.error || 'Failed to send recovery email.'
   } finally {
     loading.value = false
   }
 }
 </script>
+
 
 <style scoped>
 .recover-form {

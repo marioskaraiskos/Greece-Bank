@@ -33,6 +33,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const username = ref('')
 const email = ref('')
@@ -40,13 +41,7 @@ const password = ref('')
 const confirmPassword = ref('')
 const agreeTerms = ref(false)
 
-const handleRegister = () => {
-  console.log('Username:', username.value)
-  console.log('Email:', email.value)
-  console.log('Password:', password.value)
-  console.log('Confirm Password:', confirmPassword.value)
-  console.log('Agreed to Terms:', agreeTerms.value)
-
+const handleRegister = async () => {
   if (password.value !== confirmPassword.value) {
     alert("Passwords do not match!")
     return
@@ -57,9 +52,25 @@ const handleRegister = () => {
     return
   }
 
-  // Here you would send data to your backend API
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/register', {
+      username: username.value,
+      email: email.value,
+      password: password.value
+    })
+
+    alert(`User ${response.data.username} registered successfully!`)
+    username.value = ''
+    email.value = ''
+    password.value = ''
+    confirmPassword.value = ''
+    agreeTerms.value = false
+  } catch (err) {
+    alert(err.response?.data?.error || 'Registration failed.')
+  }
 }
 </script>
+
 
 <style scoped>
 .register-form {

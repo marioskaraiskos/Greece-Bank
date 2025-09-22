@@ -27,17 +27,29 @@
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
 
-const handleLogin = () => {
-  console.log('Email:', email.value)
-  console.log('Password:', password.value)
-  console.log('Remember Me:', rememberMe.value)
+const handleLogin = async () => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/login', {
+      email: email.value,
+      password: password.value
+    })
+
+    alert(`Welcome, ${response.data.user.username}!`)
+    email.value = ''
+    password.value = ''
+  } catch (err) {
+    alert(err.response?.data?.error || 'Login failed.')
+  }
 }
 </script>
+
+
 
 <style scoped>
 .login-form {
