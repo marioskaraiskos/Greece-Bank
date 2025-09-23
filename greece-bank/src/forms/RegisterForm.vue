@@ -34,6 +34,9 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'  // ✅ import router hook
+
+const router = useRouter()              // ✅ create router instance
 
 const username = ref('')
 const email = ref('')
@@ -65,6 +68,8 @@ const handleRegister = async () => {
     password.value = ''
     confirmPassword.value = ''
     agreeTerms.value = false
+
+    router.push('/') // redirecting to login
   } catch (err) {
     alert(err.response?.data?.error || 'Registration failed.')
   }

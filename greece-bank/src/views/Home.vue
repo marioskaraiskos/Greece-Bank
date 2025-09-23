@@ -15,17 +15,17 @@
     </div>
   </div>
 
-  <div class="app-content flex flex-col md:flex-row items-center justify-center gap-10 mt-10">
+  <div class="app-content">
     <!-- Text Section -->
-    <div class="text-container text-center md:text-left md:w-1/2">
-      <h1 class="text text-white text-4xl md:text-5xl font-bold">
+    <div class="text-container">
+      <h1 class="text">
         GREECE Web App <br />
         An app ready for anything
       </h1>
     </div>
 
     <!-- LoginForm Component -->
-    <div class="login-container md:w-1/2">
+    <div class="login-container">
       <LoginForm />
     </div>
   </div>

@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
+  text-decoration: none;
+  color: #222;
 }
 
 .hero {
@@ -33,7 +35,7 @@
   padding-top: 20px; /* content spacing inside app-content */
   
   /* background image */
-  background-image: url('./assets/background.webp');
+  background-image: url('./assets/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -41,11 +43,11 @@
   image-rendering: auto;
   
   min-height: calc(100vh - 80px); /* full height minus header */
-  margin-top: 80px; /* make sure it's below the fixed header */
+  margin-top: 10px; /* make sure it's below the fixed header */
 }
 
 .text {
-  color: rgb(0, 15, 154);
+  color: #222;
   width: 50vw;
   font-size: 40px;
   margin-top: 60px;
